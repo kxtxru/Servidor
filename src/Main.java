@@ -22,7 +22,7 @@ public class Main {
             System.out.println("ERROR: Can't connect to the server");
             return;
         }
-        c.send("Hoy");
+        c.send("Hola buenas");
         String ans = c.receive();
         System.out.println(ans);
 
