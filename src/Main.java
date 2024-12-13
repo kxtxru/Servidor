@@ -1,8 +1,12 @@
 
+import java.util.concurrent.CyclicBarrier;
+
+
 public class Main {
 
     private static final String host = "localhost";
     private static final int port = 1337;
+    static CyclicBarrier br = new CyclicBarrier(1);//hacer que vayan en orden los hilos ejejjejeejejee
     public static void main(String[] args) {
     
         //Parte SERVIDOR
