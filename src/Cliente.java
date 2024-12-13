@@ -23,10 +23,10 @@ class Cliente{
     public boolean connect(){
         try {
             socket = new Socket(host,port);
-            System.out.println("CLIENT: Connected");
+            ES.typewriter("CLIENT: Connected");
             return true;
         } catch (Exception e) {
-            System.out.println("CLIENT: Connection rejected");
+            ES.typewriter("CLIENT: Connection rejected");
             return false;
         }
     }
@@ -38,7 +38,7 @@ class Cliente{
             br = new BufferedReader(isr);
             //En caso de que sea solo una linea de mensaje
             String ans = br.readLine();
-            System.out.println("CLIENTE: Message received");
+            ES.typewriter("CLIENTE: Message received");
             //Recordar cerrar al final
             br.close();
             isr.close();
@@ -55,7 +55,7 @@ class Cliente{
             PrintWriter pw = new PrintWriter(socket.getOutputStream());
             pw.println(message);
             pw.flush();
-            System.out.println("CLIENT: Message sent");
+            ES.typewriter("CLIENT: Message sent");
             return true;
         } catch (Exception e) {
             e.printStackTrace();

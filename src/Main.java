@@ -19,18 +19,18 @@ public class Main {
         Cliente c = new Cliente(host, port);
 
         if(!c.connect()){
-            System.out.println("ERROR: Can't connect to the server");
+            ES.typewriter("ERROR: Can't connect to the server");
             return;
         }
-        c.send("Hola buenas");
+        c.send("que tal?");
         String ans = c.receive();
         System.out.println(ans);
 
         if(!c.connect()){
-            System.out.println("ERROR: Can't connect to the server");
+            ES.typewriter("ERROR: Can't connect to the server");
             return;
         }
-        c.send("Cóndor");
+        c.send("hola");
         ans = c.receive();
         System.out.println(ans);
     }

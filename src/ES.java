@@ -156,4 +156,17 @@ public class ES {
         }
         return null;
     }
+
+    public static void typewriter(String text) {
+        for (int i = 0; i < text.length(); i++) {
+            System.out.print(text.charAt(i)); // Imprime el carácter actual
+            try {
+                Thread.sleep(100); // Pausa de 200 ms entre caracteres
+            } catch (InterruptedException e) {
+                System.err.println("Error en el hilo: " + e.getMessage());
+                Thread.currentThread().interrupt(); // Restaura el estado interrumpido
+            }
+        }
+        System.out.println();
+    }
 }
