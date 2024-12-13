@@ -10,7 +10,7 @@ public class Main {
         Thread tServer = new Thread(srv);
         tServer.start();
         try {
-            Thread.sleep(1000);
+            Thread.sleep(500);
         } catch (Exception e) {
             e.printStackTrace();
         }
