@@ -39,12 +39,6 @@ class Server implements Runnable {
                 cliente = server.accept();
                 System.out.println("OK: Connection");
 
-                for (int i = 0; i < 25; i++) {
-                    String list = "/";
-                    System.out.print(list);
-                    list += "/";
-                    Thread.sleep(30);
-                }
                 System.out.println();
 
                 is = cliente.getInputStream();
@@ -75,10 +69,7 @@ class Server implements Runnable {
                 cliente.close();
             } catch (IOException e) {
                 e.printStackTrace();
-            } catch (InterruptedException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
+            } 
 
         }
     }

@@ -157,7 +157,8 @@ public class ES {
         return null;
     }
 
-    public static void typewriter(String text) {
+    
+    public static synchronized void typewriter(String text) {
         for (int i = 0; i < text.length(); i++) {
             System.out.print(text.charAt(i)); // Imprime el carácter actual
             try {
@@ -169,4 +170,5 @@ public class ES {
         }
         System.out.println();
     }
+
 }
