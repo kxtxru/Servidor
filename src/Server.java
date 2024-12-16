@@ -37,9 +37,7 @@ class Server implements Runnable {
         while (true) {
             try {
                 cliente = server.accept();
-                System.out.println("OK: Connection");
-
-                System.out.println();
+                ES.typewriter("OK: Connection");
 
                 is = cliente.getInputStream();
                 isr = new InputStreamReader(is);
