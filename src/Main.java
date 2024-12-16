@@ -29,7 +29,7 @@ public class Main {
         ES.typewriter("Frase a traducir: ");
         String frase = sc.nextLine();
 
-        c.send(frase+"~"+"en");
+        c.send(frase+"~"+"ru");
         String ans = c.receive();
         ES.typewriter(ans);
     }
