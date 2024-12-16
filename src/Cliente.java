@@ -1,9 +1,11 @@
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-class Cliente{
+class Cliente {
+
     String host = "";
     int port = 0;
 
@@ -13,16 +15,16 @@ class Cliente{
 
     final String errorMSG = "CLIENT ERROR";
 
-    public Cliente(String host,int port){
+    public Cliente(String host, int port) {
         this.host = host;
         this.port = port;
     }
 
     //Para conectar con el servidor
     //Devuelve un boolean que nos indicara si esta conectado o no
-    public boolean connect(){
+    public boolean connect() {
         try {
-            socket = new Socket(host,port);
+            socket = new Socket(host, port);
             ES.typewriter("CLIENT: Connected");
             return true;
         } catch (Exception e) {
@@ -31,9 +33,9 @@ class Cliente{
         }
     }
 
-    public String receive(){
-
+    public String receive() {
         try {
+
             isr = new InputStreamReader(socket.getInputStream());
             br = new BufferedReader(isr);
             //En caso de que sea solo una linea de mensaje
@@ -47,10 +49,10 @@ class Cliente{
             e.printStackTrace();
             return errorMSG;
         }
-        
+
     }
 
-    public boolean send(String message){
+    public boolean send(String message) {
         try {
             PrintWriter pw = new PrintWriter(socket.getOutputStream());
             pw.println(message);
@@ -60,6 +62,21 @@ class Cliente{
         } catch (Exception e) {
             e.printStackTrace();
             return false;
+        }
+    }
+
+    public void waitForServerResponse() {
+        while (true) {
+            String response = receive();
+            if (response != null && !response.isEmpty()) {
+                System.out.println("Respuesta recibida: " + response);
+                break; // Sale del bucle cuando recibe una respuesta
+            }
+            try {
+                Thread.sleep(500); // Espera medio segundo antes de volver a comprobar
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt(); // Restaura el estado de interrupción
+            }
         }
     }
 }

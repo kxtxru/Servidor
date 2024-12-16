@@ -157,18 +157,34 @@ public class ES {
         return null;
     }
 
+        // Códigos ANSI para los colores
+        private static final String[] COLORS = {
+            "\u001B[31m", // Rojo
+            "\u001B[32m", // Verde
+            "\u001B[33m", // Amarillo
+            "\u001B[34m", // Azul
+            "\u001B[35m", // Magenta
+            "\u001B[36m", // Cian
+            "\u001B[37m"  // Blanco
+        };
+
     
     public static synchronized void typewriter(String text) {
+
+        
         for (int i = 0; i < text.length(); i++) {
-            System.out.print(text.charAt(i)); // Imprime el carácter actual
+            // Selecciona un color de manera cíclica
+            String color = COLORS[i % COLORS.length];
+            System.out.print(color + text.charAt(i)); // Imprime el carácter actual con color
             try {
-                Thread.sleep(100); // Pausa de 200 ms entre caracteres
+                Thread.sleep(50); // Pausa de 100 ms entre caracteres
             } catch (InterruptedException e) {
                 System.err.println("Error en el hilo: " + e.getMessage());
                 Thread.currentThread().interrupt(); // Restaura el estado interrumpido
             }
         }
-        System.out.println();
+        // Resetea el color al blanco después de terminar de imprimir
+        System.out.println("\u001B[0m");
     }
 
 }
