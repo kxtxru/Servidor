@@ -6,8 +6,8 @@ import java.net.Socket;
 
 class Cliente {
 
-    String host = "";
-    int port = 0;
+    String host = "localhost";
+    int port = 1234;
 
     Socket socket = null;
     InputStreamReader isr = null;

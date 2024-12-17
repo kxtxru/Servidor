@@ -12,7 +12,7 @@ class Server implements Runnable {
 
     private ServerSocket server = null;
     private Socket cliente = null;
-    int port = 0;
+    int port = 12345;
 
     public Server(int port) {
         this.port = port;
@@ -38,7 +38,9 @@ class Server implements Runnable {
             try {
                 cliente = server.accept();
                 ES.typewriter("OK: Connection");
+                System.out.println();
 
+                /* 
                 is = cliente.getInputStream();
                 isr = new InputStreamReader(is);
                 bf = new BufferedReader(isr);
@@ -50,13 +52,26 @@ class Server implements Runnable {
 
                 //Coger respuesta
                 ES.typewriter(message);
-
+*/
                 //Escribir respuesta
                 os = cliente.getOutputStream();
                 pw = new PrintWriter(os);
-                pw.write(answer(message));
-                pw.flush();
-                ES.typewriter("SERVER: Message sent");
+                ES.pwtypewriter(pw, "Escribe una palabra: ");
+
+
+
+                is = cliente.getInputStream();
+                isr = new InputStreamReader(is);
+                bf = new BufferedReader(isr);
+
+                //Leer mensaje
+                ES.typewriter("SERVER: Waiting");
+                String message = bf.readLine();
+                ES.typewriter("SERVER: Message received");
+
+                ES.pwtypewriter(pw, message + " es una buena palabra");
+
+                //ES.typewriter("SERVER: Message sent");
 
                 //Cerrar
                 pw.close();
