@@ -9,7 +9,7 @@ public class Main {
     public static void main(String[] args) {
     
         // //Parte SERVIDOR
-        Server srv = new Server(port);
+        Servidor srv = new Servidor(port);
         Thread tServer = new Thread(srv);
         tServer.start();
         try {

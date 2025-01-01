@@ -1,13 +1,20 @@
-import java.io.*;
-import java.net.*;
 
-class Server2 implements Runnable {
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+class Servidor implements Runnable {
 
     private ServerSocket server = null;
     private Socket cliente = null;
     int port = 12345;
 
-    public Server2(int port) {
+    public Servidor(int port) {
         this.port = port;
     }
 
@@ -27,30 +34,32 @@ class Server2 implements Runnable {
             System.out.println("ERROR: Unable to open socket on TCP " + port);
             return;
         }
-
         while (true) {
             try {
                 cliente = server.accept();
-                System.out.println("OK: Connection established");
+                ES.typewriter("OK: Connection");
+                System.out.println();
 
-                // Enviar un mensaje inicial al cliente
-                os = cliente.getOutputStream();
-                pw = new PrintWriter(os, true);
-                pw.println("¿Cómo te llamas?");
-
-                // Leer la respuesta del cliente
+                
                 is = cliente.getInputStream();
                 isr = new InputStreamReader(is);
                 bf = new BufferedReader(isr);
 
-                System.out.println("SERVER: Waiting for message from client...");
-                String message = bf.readLine();  // Leer la respuesta del cliente
-                System.out.println("SERVER: Message received: " + message);
+                //Leer mensaje
+                ES.typewriter("SERVER: Waiting");
+                String message = bf.readLine();
+                ES.typewriter("SERVER: Message received");
 
-                // Enviar una respuesta al cliente
-                pw.println("Hola " + message + ", es un placer conocerte.");
+                //Coger respuesta
+                ES.typewriter(message);
 
-                // Cerrar las conexiones
+                //Escribir respuesta
+                os = cliente.getOutputStream();
+                pw = new PrintWriter(os);
+                ES.pwtypewriter(pw, "Escribe una palabra: ");
+
+
+                //Cerrar
                 pw.close();
                 os.close();
                 bf.close();
@@ -59,13 +68,15 @@ class Server2 implements Runnable {
                 cliente.close();
             } catch (IOException e) {
                 e.printStackTrace();
-            }
+            } 
+
         }
     }
 
-    public static void main(String[] args) {
-        Server2 server = new Server2(12345);
-        Thread serverThread = new Thread(server);
-        serverThread.start();
+    private String answer(String message) {
+        return "hola";
     }
+
+
+
 }
